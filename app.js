@@ -8,16 +8,6 @@ app.use(express.json());
 
 app.use("/api/v1/users", userRoutes);
 
-app.all("*", (req, res, next) => {
-  const reqUrl = req.originalUrl;
-
-  next(new AppError(`Cannot find ${reqUrl} on the server`, 404));
-  // res.status(404).json({
-  //   status: "fail",
-  //   message: `Cannot find ${reqUrl} on the server`,
-  // });
-});
-
 app.use((err, req, res, next) => {
   console.log(err.stack);
 

@@ -30,9 +30,10 @@ exports.signup = handleAsyncError(async function (req, res) {
 
 exports.login = handleAsyncError(async function (req, res, next) {
   const { email, password } = req.body;
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email }).select("+password");
+  console.log(user);
 
-  if (!user || !(await user.compareUserPasswords)) {
+  if (!user || !(await user.compareUserPasswords(password, user.password))) {
     return next(new AppError("Invalid email or password", 400));
   }
 
