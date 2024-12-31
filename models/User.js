@@ -38,7 +38,7 @@ userSchema.pre("save", async function (next) {
   this.passwordConfirm = undefined;
 });
 
-userSchema.methods.compareUserPasswords = async function (
+userSchema.compareUserPasswords = async function (
   candidatePassword,
   dbPassword
 ) {
